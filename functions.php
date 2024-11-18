@@ -29,3 +29,20 @@ add_action('wp_enqueue_scripts', 'your_theme_enqueue_styles');
 
 /*  Add your own functions below this line.
     ======================================== */
+
+function register_new_widgets( $widgets_manager ) {
+	
+
+	require_once( get_stylesheet_directory() . '/widgets/apic-animation/widget.php' );
+
+}
+add_action( 'elementor/widgets/register', 'register_new_widgets' );
+
+
+// Enqueue styles and scripts only when editing in Elementor
+function hello_elementor_child_enqueue_scripts() {
+    // Scripts and styles for editor
+    wp_enqueue_style( 'apic-animation-style', get_stylesheet_directory_uri() . '/widgets/apic-animation/assets/widget.css', [], '1.0.0' );
+    wp_enqueue_script( 'apic-animation-script', get_stylesheet_directory_uri() . '/widgets/apic-animation/assets/widget.js', [ 'jquery' ], '1.0.0', true );
+}
+add_action( 'wp_enqueue_scripts', 'hello_elementor_child_enqueue_scripts', 20 );
