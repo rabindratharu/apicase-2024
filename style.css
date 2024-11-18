@@ -1,0 +1,189 @@
+/* 
+ Theme Name:   Apicbase 2021
+ Theme URI:    
+ Description:  Custom Elementor theme for Apicbase using Hello framework
+ Author:       OGCdigtial
+ Author URI:   https://ogcdigital.ca/
+ Template:     hello-elementor
+ Version:      1.0
+
+ /* == Add your own styles below this line ==
+--------------------------------------------*/
+
+/*----------------------------*/
+/* ESSENTIAL ELEMENTOR TWEAKS */
+/*----------------------------*/
+.design-note {background: yellow; color: black; font-weight: bold;}
+.design-note:before {content: "[";}
+.design-note:after {content: "]";}
+p:last-child {margin-bottom: 0 !important;}
+
+
+      .item-content--mobile-image {
+        display: none;
+    }
+    .item-content--mobile-image {
+        margin-top: 34px;
+    }
+    .product-features--item {
+        padding: 150px 0 150px;
+    }
+.product-features--content {
+    width: 49%;
+    padding-right: 50px;
+    width: calc(100% - 580px);
+    width: -webkit-calc(100% - 580px);
+}
+    .product-features--sticky {
+    position: absolute;
+    top: 50px;
+    height: calc(100% - 85px);
+        height: -webkit-calc(100% - 85px);
+    margin-left: auto;
+    width: 100%;
+    max-width: 580px;
+    pointer-events: none;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    right: 0;
+}
+    .product-features--sticky-items {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        width: 100%;
+        max-width: 580px;
+        pointer-events: none;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        will-change: transform;
+    }
+    .product-features--sticky-items img.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    .product-features--sticky-items img {
+        position: absolute;
+        display: block;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transition: opacity .5s ease-out,visibility .5s ease-out;
+        transition: opacity .5s ease-out,visibility .5s ease-out;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    .product-features--sticky-items img {
+        max-width: 700px;
+        height: auto;
+    }
+   /*.rws-image-sticky {
+        position: fixed;
+        left: auto;
+        top: 130px;
+    }*/
+.rws-image-sticky {
+    position: fixed;
+    left: auto;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    height: 410px;
+}
+.big-rws-image-sticky {
+    position: fixed;
+    left: auto;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    height: 410px;
+}
+.rws-image-sticky.rws-active {
+    position: absolute;
+    bottom: 30px;
+    top: auto;
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none;
+}
+
+.product-features--item .ico-wrap {
+    background: #FFD200;
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+
+/* Responsiveness */
+@media screen and (min-width: 1025px) {.no-desk {display: none !important;}}
+@media screen and (max-width: 1024px) and (min-width: 768px) {.no-tab {display: none !important;}}
+@media screen and (max-width: 767px) {.no-mob {display: none !important;}}
+/* Section Padding */
+@media screen and (min-width: 1025px) {.elementor:not(.elementor-location-header):not(.elementor-location-footer) .elementor-section-boxed.elementor-top-section {padding-left: 50px !important; padding-right: 50px !important;}}
+@media screen and (max-width: 1024px) {.elementor:not(.elementor-location-header):not(.elementor-location-footer) .elementor-section-boxed.elementor-top-section {padding-left: 30px !important; padding-right: 30px !important;}}
+@media screen and (max-width: 767px) {.elementor:not(.elementor-location-header):not(.elementor-location-footer) .elementor-section-boxed.elementor-top-section {padding-left: 20px !important; padding-right: 20px !important;}}
+/* Auto Margins */
+.auto-left {margin-left: auto;}
+.auto-right {margin-right: auto;}
+.auto-both {margin-left: auto; margin-right: auto;}
+/* Global Font Classes */
+.uppercase {text-transform: uppercase;}
+
+/*-----------------------------------------*/
+/* ELEMENTOR HEADING WIDGET SIZE VARIABLES */
+/*-----------------------------------------*/
+/* Small */
+.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-small {font-size: 16px; line-height: 24px;}
+@media screen and (max-width: 1024px) {.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-small {font-size: 16px; line-height: 24px;}}
+@media screen and (max-width: 767px) {.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-small {font-size: 16px; line-height: 24px;}}
+/* Medium */
+.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-medium {font-size: 20px; line-height: 28px;}
+@media screen and (max-width: 1024px) {.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-medium {font-size: 20px;}}
+@media screen and (max-width: 767px) {.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-medium {font-size: 20px;}}
+/* Large */
+.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-large {font-size: 26px;}
+@media screen and (max-width: 1024px) {.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-large {font-size: 26px;}}
+@media screen and (max-width: 767px) {.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-large {font-size: 26px;}}
+/* Extra Large */
+.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-xl {font-size: 48px; line-height: 56px;}
+@media screen and (max-width: 1024px) {.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-xl {font-size: 48px;}}
+@media screen and (max-width: 767px) {.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-xl {font-size: 36px; line-height: 48px;}}
+/* Extra Extra Large */
+.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-xxl {font-size: 120px; line-height: 120px;}
+@media screen and (max-width: 1024px) {.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-xxl {font-size: 80px; line-height: 80px;}}
+@media screen and (max-width: 767px) {.elementor-kit-18000 .elementor-widget-heading .elementor-heading-title.elementor-size-xxl {font-size: 42px; line-height: 42px;}}
+
+/*----------------------------------------*/
+/* ELEMENTOR BUTTON WIDGET SIZE VARIABLES */
+/*----------------------------------------*/
+/* Extra Small */
+.elementor-kit-18000 .elementor-button.elementor-size-xs {font-size: 16px; line-height: 20px; border-radius: 0; padding: 0; background-color: transparent; color: var(--e-global-color-text); font-weight: 600;}
+/* Small - DEFAULT */
+.elementor-kit-18000 .elementor-button.elementor-size-sm {font-size: 16px; line-height: 20px; padding: 10px 20px; background-color: black; color: white; font-weight: 600;}
+/* Medium */
+.elementor-kit-18000 .elementor-button.elementor-size-md {font-size: 22px; line-height: 26px; padding: 16px 32px; background-color: black; color: white;}
+/* Large */
+.elementor-kit-18000 .elementor-button.elementor-size-lg {font-size: 26px; line-height: 32px; padding: 16px 32px; background-color: black; color: white;}
+/* Extra Large */
+.elementor-kit-18000 .elementor-button.elementor-size-xl {font-size: 32px; line-height: 40px; padding: 16px 32px; background-color: black; color: white;}
+
+/*---------------------------------*/
+/* TEXT WIDGET FONT WEIGHT CLASSES */
+/*---------------------------------*/
+.fw-300, .fw-300 .elementor-heading-title, .fw-300 .elementor-button-link, .fw-300 .elementor-text-editor {font-weight: 300;}
+.fw-400, .fw-400 .elementor-heading-title, .fw-400 .elementor-button-link, .fw-400 .elementor-text-editor {font-weight: 400;}
+.fw-500, .fw-500 .elementor-heading-title, .fw-500 .elementor-button-link, .fw-500 .elementor-text-editor {font-weight: 500;}
+.fw-600, .fw-600 .elementor-heading-title, .fw-600 .elementor-button-link, .fw-600 .elementor-text-editor {font-weight: 600;}
+.fw-700, .fw-700 .elementor-heading-title, .fw-700 .elementor-button-link, .fw-700 .elementor-text-editor {font-weight: 700;}
+.fw-800, .fw-800 .elementor-heading-title, .fw-800 .elementor-button-link, .fw-800 .elementor-text-editor {font-weight: 800;}
+.fw-900, .fw-900 .elementor-heading-title, .fw-900 .elementor-button-link, .fw-900 .elementor-text-editor {font-weight: 900;}
+.fw-bold, .fw-bold .elementor-heading-title, .fw-bold .elementor-button-link, .fw-bold .elementor-text-editor {font-weight: bold;}
+.fw-normal, .fw-normal .elementor-heading-title, .fw-normal .elementor-button-link, .fw-normal .elementor-text-editor {font-weight: normal;}
