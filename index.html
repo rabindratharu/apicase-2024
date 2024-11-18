@@ -1,0 +1,2005 @@
+<style>
+  body {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  .HomepageFrontdoorConnection {
+    position: absolute;
+  }
+  .animation1 {
+    left: 222px;
+    top: 257px;
+    height: 104px;
+  }
+  .animation2 {
+    left: 81px;
+    top: 257px;
+    width: 135px;
+    height: 53px;
+  }
+  .animation3 {
+    left: 402px;
+    top: 218px;
+    width: 45px;
+    height: 143px;
+  }
+  .animation4 {
+    left: 394px;
+    top: 167px;
+    width: 12px;
+    height: 194px;
+  }
+  .animation5 {
+    left: 38px;
+    top: 347px;
+    width: 143px;
+    height: 53px;
+  }
+  .animationbox-grid {
+    --iconSize: 78px;
+    position: relative;
+    display: grid;
+    grid: repeat(6, var(--iconSize)) / repeat(4, var(--iconSize));
+    /*  grid-template-areas:
+".        apic13      .         .       " 
+"apic1  .        apic8 apic3" 
+".        apic10 .         apic4 " 
+"apic5  .        apic11     .       " 
+".        apic14 apic2   .       " 
+"apic7 apic9  .         apic15";*/
+    gap: 12px;
+
+    grid-template-columns: repeat(6, var(--iconSize));
+    grid-template-areas:
+      ".       .        apic0      .         .       .       "
+      "apic1 .        .        apic2 apic3 .       "
+      ".       apic4    apic5 apic6   .       apic7"
+      "apic8 .        .        apic9     .       .       "
+      ".       .        apic10 apic11  apic12 .       "
+      ".       apic13 .        .         apic14   apic15";
+  }
+
+  .animationbox-grid-wrap {
+    display: grid;
+    justify-items: center;
+    position: relative;
+    align-items: center;
+    width: var(--domGraphicWidth, 540px);
+    height: var(--domGraphicHeight, 540px);
+    justify-content: flex-start;
+  }
+
+  .animationbox-grid {
+    --iconSize: 78px;
+    --inactiveSize: 78;
+    --activeSize: 88;
+    --iconScale: 1;
+    --hoverTransition: 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    --focusBoxShadow: 0 0 0 2px #4d90fe, inset 0 0 0 2px hsla(0, 0%, 100%, 0.9);
+  }
+
+  .animationbox-box {
+    --inactiveSize: 78;
+    --activeSize: 88;
+    --iconScale: 1;
+    position: relative;
+    width: calc(1px * var(--iconScale) * var(--inactiveSize));
+    height: calc(1px * var(--iconScale) * var(--inactiveSize));
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  .animationbox-box__link.Link {
+    position: absolute;
+    inset: 0;
+  }
+  .Link {
+    font-weight: var(--linkWeight, var(--fontWeightSemibold));
+    cursor: pointer;
+    color: var(--linkColor);
+    opacity: var(--linkOpacity, 1);
+    transition: var(--hoverTransition);
+    transition-property: color, opacity;
+    outline: none;
+  }
+
+  .animationbox-box__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: calc(50% - 1px * var(--activeSize) / 2);
+    left: calc(50% - 1px * var(--activeSize) / 2);
+    width: calc(1px * var(--activeSize));
+    height: calc(1px * var(--activeSize));
+    border-radius: 8px;
+    transform-origin: center;
+    transform-box: fill-box;
+    transform: scale(
+      calc(var(--iconScale) * var(--inactiveSize) / var(--activeSize))
+    );
+    border: calc(1px / var(--iconScale)) solid #c4ccd8;
+    background: #f6f9fc;
+  }
+  .animationbox-box__iconLogo {
+    transform-origin: top center;
+    transform-box: fill-box;
+  }
+  .animationbox-box__iconLogo svg {
+    display: block;
+  }
+  .animationbox-boxOutline {
+    stroke-width: calc(1px / var(--iconScale));
+  }
+  .animationbox-box__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: calc(50% - 1px * var(--activeSize) / 2);
+    left: calc(50% - 1px * var(--activeSize) / 2);
+    width: calc(1px * var(--activeSize));
+    height: calc(1px * var(--activeSize));
+    border-radius: 8px;
+    transform-origin: center;
+    transform-box: fill-box;
+    transform: scale(
+      calc(var(--iconScale) * var(--inactiveSize) / var(--activeSize))
+    );
+  }
+  .animationbox-box__link.Link:hover .animationbox-box__icon,
+  .active-box .animationbox-box__icon {
+    box-shadow: 0 12.6px 25.2px -11.5733px rgba(50, 50, 93, 0.25),
+      0 7.56px 15.12px -7.56px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    transform: scale(1.001);
+    transition: var(--hoverTransition);
+  }
+  .animationbox-box__iconLogo {
+    transform-origin: top center;
+    transform-box: fill-box;
+  }
+  .animationbox-box__iconLogo svg {
+    display: block;
+  }
+  .animationbox-box__label {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    font: var(--fontWeightSemibold) 12px/15px var(--fontFamily);
+    letter-spacing: 0.2px;
+    color: #2e3a55;
+    opacity: 0;
+    transition: var(--hoverTransition);
+  }
+  .animationbox-box__link.Link:hover .animationbox-box__label,
+  .active-box .animationbox-box__label {
+    opacity: 1;
+    transition: var(--hoverTransition);
+    bottom: 7px;
+  }
+  .animationbox-box__iconLogo {
+    position: absolute;
+    transition: var(--hoverTransition);
+  }
+  .animationbox-box__iconLogo.color-icon {
+    opacity: 0;
+  }
+  .animationbox-box__link.Link:hover .animationbox-box__iconLogo.color-icon,
+  .active-box .animationbox-box__iconLogo.color-icon {
+    opacity: 1;
+    transform: scale(0.8);
+    transition: var(--hoverTransition);
+  }
+
+  .animationbox-box__link.Link:hover .animationbox-box__iconLogo.border-icon,
+  .active-box .animationbox-box__iconLogo.border-icon {
+    opacity: 0;
+    transform: scale(0.75);
+    transition: var(--hoverTransition);
+  }
+
+  .svg path {
+    stroke-dasharray: 0 192px;
+    stroke-dashoffset: 0;
+    transition: "stroke-dasharray 0.75s ease-out, stroke-dashoffset 0.75s ease-out";
+  }
+  .svg.apic10 path {
+    stroke-dasharray: 0 100px;
+    stroke-dashoffset: 0;
+    transition: "stroke-dasharray 0.75s ease-out, stroke-dashoffset 0.75s ease-out";
+  }
+  .svg.apic5 path {
+    stroke-dasharray: 0 100px;
+    stroke-dashoffset: 0;
+    transition: "stroke-dasharray 0.75s ease-out, stroke-dashoffset 0.75s ease-out";
+  }
+  .svg {
+    position: absolute;
+    top: 130px;
+    left: 80px;
+  }
+
+  .services div {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.75s;
+    border-radius: 6px;
+  }
+</style>
+
+<div class="animationbox-grid-wrap">
+  <div class="animationbox-grid">
+    <svg class="svg svg-apic1" style="width: 194px; height: 4px">
+      <defs>
+        <linearGradient
+          id="Sticky-BillingInvoicingConnectionGradient"
+          gradientUnits="userSpaceOnUse"
+          x1="3"
+          x2="97"
+          y1="33"
+          y2="67"
+        >
+          <stop offset="0" stop-color="#FFD848"></stop>
+          <stop offset="1" stop-color="#00D924"></stop>
+        </linearGradient>
+      </defs>
+      <path
+        stroke="url(#Sticky-BillingInvoicingConnectionGradient)"
+        stroke-width="2"
+        fill="none"
+        d="M1,1 L193,1"
+        style="stroke-dasharray: 0 192px; stroke-dashoffset: 0"
+      ></path>
+    </svg>
+    <svg class="svg svg-apic10" style="width: 104px; left: 222px; top: 257px">
+      <defs>
+        <linearGradient
+          class="RotatingGradient"
+          id="Sticky-PaymentsTerminalConnectionGradient"
+          gradientUnits="userSpaceOnUse"
+          data-js-controller="RotatingGradient"
+          data-js-start-rotation=""
+          data-js-speed=""
+          x1="0.07293071046156285"
+          x2="99.92706928953848"
+          y1="47.300416299199554"
+          y2="52.699583700799906"
+        >
+          <stop offset="0" stop-color="#11EFE3"></stop>
+          <stop offset="1" stop-color="#9966FF"></stop>
+        </linearGradient>
+      </defs>
+      <path
+        stroke="url(#Sticky-PaymentsTerminalConnectionGradient)"
+        stroke-width="2"
+        fill="none"
+        data-js-target="HomepageFrontdoorConnection.path"
+        d="M1,1
+                  L1,103"
+        style="stroke-dasharray: 0 102px; stroke-dashoffset: 0"
+      ></path>
+    </svg>
+    <svg
+      class="svg svg-apic5"
+      style="left: 81px; top: 257px; width: 135px; height: 53px"
+    >
+      <defs>
+        <linearGradient
+          class="RotatingGradient"
+          id="Sticky-PaymentsConnectConnectionGradient"
+          gradientUnits="userSpaceOnUse"
+          data-js-controller="RotatingGradient"
+          data-js-start-rotation="180"
+          data-js-speed=""
+          x1="99.92706928953848"
+          x2="0.07293071046154154"
+          y1="47.300416299200435"
+          y2="52.6995837008001"
+        >
+          <stop offset="0" stop-color="#11EFE3"></stop>
+          <stop offset="1" stop-color="#0073E6"></stop>
+        </linearGradient>
+      </defs>
+      <path
+        stroke="url(#Sticky-PaymentsConnectConnectionGradient)"
+        stroke-width="2"
+        fill="none"
+        data-js-target="HomepageFrontdoorConnection.path"
+        d="M134,1
+                  L134,32
+                  Q134,52
+                  114,52
+                  L1,52"
+        style="stroke-dasharray: 0 176.464px; stroke-dashoffset: 0"
+      ></path>
+    </svg>
+    <svg
+      class="svg svg-apic12"
+      style="left: 394px; top: 167px; width: 12px; height: 194px"
+    >
+      <defs>
+        <linearGradient
+          class="RotatingGradient"
+          id="Sticky-IssuingCapitalConnectionGradient"
+          gradientUnits="userSpaceOnUse"
+          data-js-controller="RotatingGradient"
+          data-js-start-rotation="-30"
+          data-js-speed=""
+          x1="94.64894717039655"
+          x2="5.351052829718817"
+          y1="27.495077947810238"
+          y2="72.50492205241866"
+        >
+          <stop offset="0" stop-color="#0073e6"></stop>
+
+          <stop offset="1" stop-color="#ff80ff"></stop>
+        </linearGradient>
+      </defs>
+
+      <path
+        stroke="url(#Sticky-IssuingCapitalConnectionGradient)"
+        stroke-width="2"
+        fill="none"
+        data-js-target="HomepageFrontdoorConnection.path"
+        d="M1,193 L1,1"
+        style="stroke-dasharray: 0 192px; stroke-dashoffset: 0"
+      ></path>
+    </svg>
+    <svg
+      class="svg svg-apic7"
+      style="left: 402px; top: 218px; width: 45px; height: 143px"
+    >
+      <defs>
+        <linearGradient
+          class="RotatingGradient"
+          id="Sticky-IssuingTreasuryConnectionGradient"
+          gradientUnits="userSpaceOnUse"
+          data-js-controller="RotatingGradient"
+          data-js-start-rotation=""
+          data-js-speed=""
+          x1="44.16212964284276"
+          x2="55.83787035717364"
+          y1="99.65802321572039"
+          y2="0.34197678428154177"
+        >
+          <stop offset="0" stop-color="#0073e6"></stop>
+
+          <stop offset="1" stop-color="#ff80ff"></stop>
+        </linearGradient>
+      </defs>
+
+      <path
+        stroke="url(#Sticky-IssuingTreasuryConnectionGradient)"
+        stroke-width="2"
+        fill="none"
+        data-js-target="HomepageFrontdoorConnection.path"
+        d="M1,142
+                              L1,21
+                              Q1,1 21,1
+                              L44,1"
+        style="stroke-dasharray: 0 176.465px; stroke-dashoffset: 0"
+      ></path>
+    </svg>
+    <svg
+      class="svg svg-apic8"
+      style="left: 38px; top: 347px; width: 143px; height: 53px"
+    >
+      <defs>
+        <linearGradient
+          class="RotatingGradient"
+          id="Sticky-ConnectTerminalConnectionGradient"
+          gradientUnits="userSpaceOnUse"
+          data-js-controller="RotatingGradient"
+          data-js-start-rotation=""
+          data-js-speed=""
+          x1="78.04640039929177"
+          x2="21.953599600721894"
+          y1="91.39322921254883"
+          y2="8.606770787441903"
+        >
+          <stop offset="0" stop-color="#11efe3"></stop>
+
+          <stop offset="1" stop-color="#9966ff"></stop>
+        </linearGradient>
+      </defs>
+
+      <path
+        stroke="url(#Sticky-ConnectTerminalConnectionGradient)"
+        stroke-width="2"
+        fill="none"
+        data-js-target="HomepageFrontdoorConnection.path"
+        d="M1,1
+                              L1,32
+                              Q1,52
+                              21,52
+                              L142,52"
+        style="stroke-dasharray: 0 184.464px; stroke-dashoffset: 0"
+      ></path>
+    </svg>
+    <svg
+      class="svg svg-apic9"
+      style="left: 218px; top: 257px; width: 53px; height: 53px"
+    >
+      <defs>
+        <linearGradient
+          class="RotatingGradient"
+          id="Sticky-PaymentsRadarConnectionGradient"
+          gradientUnits="userSpaceOnUse"
+          data-js-controller="RotatingGradient"
+          data-js-start-rotation=""
+          data-js-speed=""
+          x1="7.286128415035414"
+          x2="92.71387158497316"
+          y1="75.99086713103576"
+          y2="24.00913286897835"
+        >
+          <stop offset="0" stop-color="#ff5996"></stop>
+
+          <stop offset="1" stop-color="#9966ff"></stop>
+        </linearGradient>
+      </defs>
+
+      <path
+        stroke="url(#Sticky-PaymentsRadarConnectionGradient)"
+        stroke-width="2"
+        fill="none"
+        data-js-target="HomepageFrontdoorConnection.path"
+        d="M1,1
+                              L1,32
+                              Q1,52
+                              21,52
+                              L52,52"
+        style="stroke-dasharray: 0 94.4645px; stroke-dashoffset: 0"
+      ></path>
+    </svg>
+    <svg
+      class="svg svg-apic0"
+      style="left: 218px; top: 77px; width: 4px; height: 104px"
+    >
+      <defs>
+        <linearGradient
+          class="RotatingGradient"
+          id="Sticky-PaymentsTaxConnectionGradient"
+          gradientUnits="userSpaceOnUse"
+          data-js-controller="RotatingGradient"
+          data-js-start-rotation=""
+          data-js-speed=""
+          x1="57.02346196123593"
+          x2="42.97653803874772"
+          y1="0.4957478384020817"
+          y2="99.50425216159559"
+        >
+          <stop offset="0" stop-color="#ff5996"></stop>
+
+          <stop offset="1" stop-color="#9966ff"></stop>
+        </linearGradient>
+      </defs>
+
+      <path
+        stroke="url(#Sticky-PaymentsTaxConnectionGradient)"
+        stroke-width="2"
+        fill="none"
+        data-js-target="HomepageFrontdoorConnection.path"
+        d="M1,103 L1,1"
+        style="stroke-dasharray: 0 102px; stroke-dashoffset: 0"
+      ></path>
+    </svg>
+
+    <div id="apic0" class="animationbox-box" style="grid-area: apic0">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic1" class="animationbox-box" style="grid-area: apic1">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic2" class="animationbox-box" style="grid-area: apic2">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic3" class="animationbox-box" style="grid-area: apic3">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic4" class="animationbox-box" style="grid-area: apic4">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic5" class="animationbox-box" style="grid-area: apic5">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic6" class="animationbox-box" style="grid-area: apic6">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic7" class="animationbox-box" style="grid-area: apic7">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic8" class="animationbox-box" style="grid-area: apic8">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic9" class="animationbox-box" style="grid-area: apic9">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic10" class="animationbox-box" style="grid-area: apic10">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic11" class="animationbox-box" style="grid-area: apic11">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic12" class="animationbox-box" style="grid-area: apic12">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic13" class="animationbox-box" style="grid-area: apic13">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic14" class="animationbox-box" style="grid-area: apic14">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+    <div id="apic15" class="animationbox-box" style="grid-area: apic15">
+      <a class="Link animationbox-box__link" href="/apic0">
+        <div class="animationbox-box__icon">
+          <div class="animationbox-box__iconLogo border-icon">
+            <svg
+              class="animationbox-boxOutline"
+              width="42"
+              height="42"
+              viewBox="0 0 42 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.5137 1.30316C22.5148 1.30316 23.4298 1.86935 23.8765 2.76525L32.0899 19.1921L40.7424 36.5031C41.1523 37.3223 41.1089 38.2954 40.6276 39.0748C40.2746 39.6464 39.723 40.0543 39.0927 40.2312L38.9189 40.2735C38.8019 40.2979 38.6826 40.3146 38.5618 40.3229L38.3796 40.3293L21.5137 36.9756L10.9375 19.1921L19.1509 2.76525C19.5976 1.86935 20.5126 1.30316 21.5137 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+              <path
+                d="M21.512 1.30316C22.5131 1.30316 23.4281 1.86935 23.8748 2.76525L32.0883 19.1921L21.512 36.9756L4.64618 40.3293C3.73009 40.3293 2.87951 39.8543 2.39818 39.0748C1.91685 38.2954 1.87341 37.3223 2.28337 36.5031L10.9358 19.1921L19.1492 2.76525C19.5959 1.86935 20.5109 1.30316 21.512 1.30316Z"
+                stroke="#C4CCD8"
+              ></path>
+            </svg>
+          </div>
+          <div class="animationbox-box__iconLogo color-icon">
+            <svg
+              class="ProductIcon ProductIcon--apic0"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#product-icon-apic0-Sticky-a)">
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42 8.65 17.31a2.64 2.64 0 0 1-1.65 3.73l-.17.04c-.12.03-.24.04-.36.05h-.18L20.5 35.99 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.52.3z"
+                  fill="#FB0"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 3.65 39.33a2.64 2.64 0 0 1-2.37-3.83l8.66-17.3 8.2-16.43A2.64 2.64 0 0 1 20.52.3z"
+                  fill="url(#product-icon-apic0-Sticky-b)"
+                ></path>
+                <path
+                  d="M20.51.3c1 0 1.92.57 2.36 1.47l8.22 16.42L20.5 35.98 9.94 18.19l8.2-16.42A2.64 2.64 0 0 1 20.34.3h.18z"
+                  fill="url(#product-icon-apic0-Sticky-c)"
+                ></path>
+              </g>
+              <defs>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-b"
+                  x1="16.03"
+                  y1="18.01"
+                  x2="15.94"
+                  y2="39.33"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFD748"></stop>
+                  <stop offset=".54" stop-color="#FFCD48"></stop>
+                  <stop offset="1" stop-color="#FFCB48"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="product-icon-apic0-Sticky-c"
+                  x1="20.51"
+                  y1="34.72"
+                  x2="20.51"
+                  y2="15.01"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFAD00"></stop>
+                  <stop offset="1" stop-color="#FF7600"></stop>
+                </linearGradient>
+                <clipPath id="product-icon-apic0-Sticky-a">
+                  <path fill="#fff" d="M0 0h40v40H0z"></path>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <span
+            class="animationbox-box__label"
+            data-js-target="animationbox-box.label"
+          >
+            apic0
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // function animatePath() {
+    //   console.log("Running animation");
+
+    //   // Step 1: Draw the path and add classes
+    //   path.style.strokeDasharray = "192px 192px";
+    //   path.style.strokeDashoffset = "0"; // Start drawing from the beginning
+
+    //   billDiv.classList.add("active-box");
+    //   invoiceDiv.classList.add("active-box");
+
+    //   // Step 2: Retract path after a delay
+    //   setTimeout(() => {
+    //     path.style.strokeDashoffset = "-192px"; // Retract from end
+    //   }, 2000);
+
+    //   // Step 3: Reset for the next loop
+    //   setTimeout(() => {
+    //     path.style.transition = "none";
+    //     path.style.strokeDasharray = "0 192px";
+    //     path.style.strokeDashoffset = "0";
+
+    //     // Remove the background classes
+    //     billDiv.classList.remove("active-box");
+    //     invoiceDiv.classList.remove("active-box");
+
+    //     // Force reflow to apply reset
+    //     void path.offsetWidth;
+
+    //     // Reapply transition
+    //     setTimeout(() => {
+    //       path.style.transition =
+    //         "stroke-dasharray 0.75s ease-out, stroke-dashoffset 0.65s ease-out";
+    //     }, 10);
+    //   }, 2750); // Matches the total animation duration
+    // } []  animatePathVar(['apic5','apic10'],['.svg-apic10 path','.svg-apic5 path',],100,2750)
+    function animatePathVar(divs, svgs, offSet, animationTime, delayDivs) {
+      console.log("Running animation dynamic:::");
+      svgs.map((svg) => {
+        const path = document.querySelector(svg);
+        path.style.strokeDasharray = `${offSet}px ${offSet}px`;
+        path.style.strokeDashoffset = "0";
+      });
+
+      // const path = document.querySelector(svgPath);
+
+      // Step 1: Draw the path and add classes
+
+      // Start drawing from the beginning
+
+      divs.map((div) => {
+        const divToAddClass = document.getElementById(div);
+        divToAddClass.classList.add("active-box");
+      });
+      setTimeout(() => {
+        delayDivs.map((div) => {
+          const divToAddClass = document.getElementById(div);
+          divToAddClass.classList.add("active-box");
+        });
+      }, 750);
+      // Step 2: Retract path after a delay
+      setTimeout(() => {
+        svgs.map((svg) => {
+          const path = document.querySelector(svg);
+          path.style.strokeDashoffset = `-${offSet}px`;
+        });
+        // path.style.strokeDashoffset = `-${offSet}px`; // Retract from end
+      }, 2000);
+
+      // Step 3: Reset for the next loop
+      setTimeout(() => {
+        svgs.map((svg) => {
+          const path = document.querySelector(svg);
+          path.style.transition = "none";
+          path.style.strokeDasharray = `0 ${offSet}px`;
+          path.style.strokeDashoffset = "0";
+        });
+
+        // Remove the background classes
+        divs.map((div) => {
+          const divToRemoveClass = document.getElementById(div);
+          divToRemoveClass.classList.remove("active-box");
+        });
+
+        delayDivs.map((div) => {
+          const divToRemoveClass = document.getElementById(div);
+          divToRemoveClass.classList.remove("active-box");
+        });
+
+        // Force reflow to apply reset
+
+        svgs.map((svg) => {
+          const path = document.querySelector(svg);
+          void path.offsetWidth;
+        });
+        // Reapply transition
+        setTimeout(() => {
+          svgs.map((svg) => {
+            const path = document.querySelector(svg);
+            path.style.transition =
+              "stroke-dasharray 0.75s ease-out, stroke-dashoffset 0.6s ease-out";
+          });
+        }, 10);
+      }, 2750); // Matches the total animation duration
+    }
+    function animationLoop() {
+      animatePathVar(["apic1"], [".svg path"], 192, 2200, ["apic2"]);
+      setTimeout(() => {
+        animatePathVar(
+          ["apic5"],
+          [".svg-apic10 path", ".svg-apic5 path"],
+          192,
+          2750,
+          ["apic10", "apic8"]
+        );
+        setTimeout(() => {
+          animatePathVar(
+            ["apic12"],
+            [".svg-apic12 path", ".svg-apic7 path"],
+            192,
+            2750,
+            ["apic7", "apic3"]
+          );
+          setTimeout(() => {
+            animatePathVar(
+              ["apic5"],
+              [".svg-apic0 path", ".svg-apic9 path"],
+              192,
+              2750,
+              ["apic0", "apic9"]
+            );
+            setTimeout(() => {
+              animatePathVar(["apic8"], [".svg-apic8 path"], 192, 2750, [
+                "apic10",
+              ]);
+            }, 2200);
+          }, 2200);
+        }, 2200);
+      }, 2200);
+    }
+    let svgArray = [
+      ".svg path",
+      ".svg-apic10 path",
+      ".svg-apic5 path",
+      ".svg-apic12 path",
+      ".svg-apic7 path",
+      ".svg-apic0 path",
+      ".svg-apic9 path",
+      ".svg-apic8 path",
+    ];
+    svgArray.map((svg) => {
+      const path = document.querySelector(svg);
+      path.style.transition = "none";
+      path.style.strokeDasharray = `0 192px`;
+      path.style.strokeDashoffset = "0";
+      path.style.transition =
+        "stroke-dasharray 0.75s ease-out, stroke-dashoffset 0.6s ease-out";
+    });
+    animationLoop();
+    setInterval(() => {
+      animationLoop();
+    }, 11000);
+  });
+</script>
