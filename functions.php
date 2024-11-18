@@ -31,8 +31,6 @@ add_action('wp_enqueue_scripts', 'your_theme_enqueue_styles');
     ======================================== */
 
 function register_new_widgets( $widgets_manager ) {
-	
-
 	require_once( get_stylesheet_directory() . '/widgets/apic-animation/widget.php' );
 
 }
