@@ -10,7 +10,7 @@ class Apic_Animation_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_title() {
-        return __( 'APIC Animation', 'Apic_Animation_Widget' );
+        return __( 'APIC Animation', 'hello-elementor' );
     }
 
     public function get_icon() {

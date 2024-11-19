@@ -1,0 +1,43 @@
+pre {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  font-family: "Fira Code", monospace;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.line-numbers-rows {
+  counter-reset: line; /* Reset line counter */
+}
+
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: line;
+  position: relative;
+  padding-right: 10px;
+}
+
+.line-numbers-rows > span::before {
+  content: counter(line); /* Insert the current line number */
+  position: absolute;
+  right: 10px;
+  color: #999;
+}
+
+.line-numbers .line-numbers-rows {
+  height: 100%;
+}
+.line-numbers-rows > span {
+  height: 23px;
+  counter-increment: linenumber;
+}
+.line-numbers-rows > span::before {
+  content: counter(linenumber);
+  color: #999;
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
+  position: absolute;
+}
