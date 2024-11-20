@@ -84,14 +84,12 @@ class Apic_Typing_Widget extends \Elementor\Widget_Base {
         // echo '</pre>';
         ?>
 <div class="code_wrapper">
-    <pre class="line-numbers" data-start-index="100">
-        <code class="language-javascript">
-            const greet = (name) => {
-            console.log(`Hello, ${name}!`);
-            };
-            greet("World");
-        </code>
-    </pre>
+    <div id="editor-container">
+        <pre class="language-js line-numbers">
+    <code id="code-content" class="language-js "></code>
+  </pre>
+        <ul id="autocomplete-box" class="autocomplete hidden"></ul>
+    </div>
 </div>
 
 <?php

@@ -1,43 +1,53 @@
-pre {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #f5f5f5;
-  font-family: "Fira Code", monospace;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: auto;
-}
-
-.line-numbers-rows {
-  counter-reset: line; /* Reset line counter */
-}
-
-.line-numbers-rows > span {
-  display: block;
-  counter-increment: line;
+#editor-container {
   position: relative;
-  padding-right: 10px;
+  background: #1e1e1e;
+  font-family: "Courier New", Courier, monospace;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 800px;
+  margin: 20px auto;
+  border: 1px solid #3a3a3a;
+  color: #dcdcdc;
+  overflow: hidden;
+  height: 500px;
 }
 
-.line-numbers-rows > span::before {
-  content: counter(line); /* Insert the current line number */
+/* Autocomplete Box */
+#autocomplete-box {
   position: absolute;
-  right: 10px;
-  color: #999;
+  background: #252526;
+  border: 1px solid #555;
+  color: #dcdcdc;
+  border-radius: 3px;
+  font-size: 14px;
+  list-style: none;
+  padding: 5px 0;
+  width: 200px;
+  z-index: 10;
+  display: none;
+  top: -50px;
 }
 
-.line-numbers .line-numbers-rows {
-  height: 100%;
+#autocomplete-box li {
+  padding: 5px 10px;
+  cursor: pointer;
 }
-.line-numbers-rows > span {
-  height: 23px;
-  counter-increment: linenumber;
+
+#autocomplete-box li.selected {
+  background: #007acc;
+  color: #fff;
 }
-.line-numbers-rows > span::before {
-  content: counter(linenumber);
-  color: #999;
-  display: block;
-  padding-right: 0.8em;
-  text-align: right;
-  position: absolute;
+
+/* Typing Caret */
+.typing-caret {
+  display: inline-block;
+  width: 1ch;
+  background: #dcdcdc;
+  animation: blink 0.5s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    background: transparent;
+  }
 }

@@ -43,11 +43,11 @@ function hello_elementor_child_enqueue_scripts() {
     wp_enqueue_style( 'apic-animation-style', get_stylesheet_directory_uri() . '/widgets/apic-animation/assets/widget.css', [], '1.0.0' );
     wp_enqueue_script( 'apic-animation-script', get_stylesheet_directory_uri() . '/widgets/apic-animation/assets/widget.js', [ 'jquery' ], '1.0.0', true );
 
-    wp_enqueue_style( 'apic-prism-style', get_stylesheet_directory_uri() . '/widgets/apic-typing/assets/prism.css', [], '1.0.0' );
-    wp_enqueue_style( 'apic-prism-line-numbers-style', get_stylesheet_directory_uri() . '/widgets/apic-typing/assets/prism-line-numbers.css', [], '1.0.0' );
+    wp_enqueue_style( 'prism-okaidia', get_stylesheet_directory_uri() . '/widgets/apic-typing/assets/prism-okaidia.min.css', [], '1.0.0' );
+    wp_enqueue_style( 'prism-line-numbers', get_stylesheet_directory_uri() . '/widgets/apic-typing/assets/prism-line-numbers.min.css', [], '1.0.0' );
 
-    wp_enqueue_script( 'apic-prism-script', get_stylesheet_directory_uri() . '/widgets/apic-typing/assets/prism.js', [ 'jquery' ], '1.0.0', true );
-    wp_enqueue_script( 'apic-prism-line-numbers-script', get_stylesheet_directory_uri() . '/widgets/apic-typing/assets/prism-line-numbers.js', [ 'jquery' ], '1.0.0', true );
+    wp_enqueue_script( 'prism', get_stylesheet_directory_uri() . '/widgets/apic-typing/assets/prism.min.js', [ 'jquery' ], '1.0.0', true );
+    wp_enqueue_script( 'prism-line-numbers', get_stylesheet_directory_uri() . '/widgets/apic-typing/assets/prism-line-numbers.min.js', [ 'jquery' ], '1.0.0', true );
 
     wp_enqueue_style( 'apic-typing-style', get_stylesheet_directory_uri() . '/widgets/apic-typing/assets/widget.css', [], '1.0.0' );
     wp_enqueue_script( 'apic-typing-script', get_stylesheet_directory_uri() . '/widgets/apic-typing/assets/widget.js', [ 'jquery' ], '1.0.0', true );
