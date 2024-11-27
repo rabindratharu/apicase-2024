@@ -1,15 +1,13 @@
 #editor-container {
   position: relative;
-  background: #1e1e1e;
+  background: #272822;
   font-family: "Courier New", Courier, monospace;
-  padding: 20px;
   border-radius: 5px;
-  max-width: 800px;
-  margin: 20px auto;
-  border: 1px solid #3a3a3a;
   color: #dcdcdc;
+  border: 4px solid #fff;
   overflow: hidden;
   height: 500px;
+  box-shadow: rgba(0, 2.94, 5.88, 0.1);
 }
 
 /* Autocomplete Box */

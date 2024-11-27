@@ -1,0 +1,99 @@
+.apic-image-scroll-wrapper .slider-logo-anim-inner {
+  margin: 0;
+  padding-inline: 0;
+  list-style: none;
+}
+
+.apic-image-scroll-wrapper .slider-logo-anim-inner li {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: 300ms;
+  box-shadow: 0 0.95px 1.9px 0 rgba(0, 0, 0, 0.16);
+  display: flex;
+  align-items: center;
+}
+.apic-image-scroll-wrapper .slider-logo-anim-inner li a {
+  display: block;
+}
+.apic-image-scroll-wrapper .scroller {
+  max-width: 600px;
+  /* border: 3px solid lime; */
+}
+
+.apic-image-scroll-wrapper .scroller__inner {
+  display: flex;
+  padding-block: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.apic-image-scroll-wrapper .scroller[data-animated="true"] {
+  overflow: hidden;
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent,
+    white 20%,
+    white 80%,
+    transparent
+  );
+  mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+.apic-image-scroll-wrapper .scroller[data-animated="true"] .scroller__inner {
+  width: max-content;
+  flex-wrap: nowrap;
+  animation: scroll var(--_animation-duration, 40s)
+    var(--_animation-direction, forwards) linear infinite;
+  animation-delay: 1s;
+}
+
+.apic-image-scroll-wrapper .scroller[data-direction="left"] {
+  --_animation-direction: forwards;
+}
+.apic-image-scroll-wrapper .scroller[data-direction="right"] {
+  --_animation-direction: reverse;
+}
+
+.apic-image-scroll-wrapper .scroller[data-direction="slow"] {
+  --_animation-duration: 30s;
+}
+.apic-image-scroll-wrapper .scroller[data-speed="fast"] {
+  --_animation-duration: 20s;
+}
+
+@keyframes scroll {
+  to {
+    transform: translate(calc(-50% - 0.5rem));
+  }
+}
+
+.apic-image-scroll-wrapper
+  .scroller[data-animated="true"]
+  .scroller__inner:has(img:hover, img:active, img:focus) {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+.apic-image-scroll-wrapper img:hover,
+.apic-image-scroll-wrapper img:focus,
+.apic-image-scroll-wrapper img:active {
+  transform: scale(1.1);
+  filter: saturate(1.5);
+}
+
+.apic-image-scroll-wrapper
+  .scroller[data-animated="true"]
+  .scroller__inner:has(li:hover, li:active, li:focus) {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+.apic-image-scroll-wrapper li:hover,
+.apic-image-scroll-wrapper li:focus,
+.apic-image-scroll-wrapper li:active {
+  transform: scale(1.1);
+  filter: saturate(3);
+}
+.apic-image-scroll-wrapper .slider-logo-anim-inner img {
+  max-width: 80px;
+}
