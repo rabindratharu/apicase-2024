@@ -1,36 +1,49 @@
-(function ($, elementor) {
-  $(document).ready(function () {
-    if (elementor) {
-      // Get accordion handler
-      var accordionHandler =
-        elementor.elementsHandler.getHandlers("accordion.default");
-      // Register the handler for custom element
-      elementor.hooks.addAction(
-        "frontend/element_ready/repeater_accordion.default",
-        accordionHandler
-      );
+document.addEventListener("DOMContentLoaded", () => {
+  class Accordion {
+    constructor(el, multiple = false) {
+      this.el = el;
+      this.multiple = multiple;
 
-      /*var repeaterAccordions = jQuery('[data-element_type="repeater_accordion.default"]');
-			$(repeaterAccordions).each( function() {
-				elementor.hooks.doAction( 'frontend/element_ready/repeater_accordion.default',jQuery(this) );
-			} );*/
+      // Get all accordion headings
+      const links = this.el.querySelectorAll(".apicbase-image-heading");
 
-      var repeaterAccordions;
-      if (elementor.isEditMode()) {
-        // Elements outside from the Preview
-        $repeaterAccordions = jQuery(
-          '[data-element_type="repeater_accordion.default"]',
-          ".elementor:not(.elementor-edit-mode)"
-        );
-      } else {
-        $repeaterAccordions = $(
-          '[data-element_type="repeater_accordion.default"]'
-        );
-      }
-
-      $repeaterAccordions.each(function () {
-        elementor.elementsHandler.runReadyTrigger($(this));
+      // Attach click event to each heading
+      links.forEach((link) => {
+        link.addEventListener("click", (e) => this.toggleDropdown(e, link));
       });
     }
-  });
-})(jQuery, window.elementorFrontend);
+
+    toggleDropdown(event, link) {
+      // Find the next sibling (the submenu)
+      const nextElement = link.nextElementSibling;
+
+      if (nextElement) {
+        // Toggle the visibility of the submenu
+        nextElement.style.display =
+          nextElement.style.display === "block" ? "none" : "block";
+      }
+
+      // Toggle the 'accordion-open' class on the parent element
+      link.parentElement.classList.toggle("accordion-open");
+
+      // If not multiple, close other accordions
+      if (!this.multiple) {
+        const allSubmenus = this.el.querySelectorAll(".accordion-submenu");
+        allSubmenus.forEach((submenu) => {
+          if (submenu !== nextElement) {
+            submenu.style.display = "none";
+            submenu.parentElement.classList.remove("accordion-open");
+          }
+        });
+      }
+    }
+  }
+
+  // Initialize the accordion
+  const accordionContainer = document.querySelector(
+    ".apicbase-image-accordion"
+  );
+  if (accordionContainer) {
+    new Accordion(accordionContainer, false);
+  }
+});

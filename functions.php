@@ -27,14 +27,19 @@ function your_theme_enqueue_styles() {
 
 add_action('wp_enqueue_scripts', 'your_theme_enqueue_styles');
 
-/*  Add your own functions below this line.
-    ======================================== */
-
+/**
+ * Register new Elementor widgets.
+ *
+ * @param \Elementor\Widgets_Manager $widgets_manager Elementor widgets manager.
+ * @return void
+ */
 function register_new_widgets( $widgets_manager ) {
-	require_once( get_stylesheet_directory() . '/widgets/apic-animation/widget.php' );
+
+  require_once( get_stylesheet_directory() . '/widgets/apic-animation/widget.php' );
   require_once( get_stylesheet_directory() . '/widgets/apic-typing/widget.php' );
   require_once( get_stylesheet_directory() . '/widgets/apic-scroll/widget.php' );
   require_once( get_stylesheet_directory() . '/widgets/apic-accordion/widget.php' );
+
 }
 add_action( 'elementor/widgets/register', 'register_new_widgets' );
 
@@ -56,5 +61,8 @@ function hello_elementor_child_enqueue_scripts() {
 
     wp_enqueue_style( 'apic-scroll-style', get_stylesheet_directory_uri() . '/widgets/apic-scroll/assets/widget.css', [], '1.0.0' );
     wp_enqueue_script( 'apic-scroll-script', get_stylesheet_directory_uri() . '/widgets/apic-scroll/assets/widget.js', [ 'jquery' ], '1.0.0', true );
+
+    wp_enqueue_style( 'apic-accordion-style', get_stylesheet_directory_uri() . '/widgets/apic-accordion/assets/widget.css', [], '1.0.0' );
+    wp_enqueue_script( 'apic-accordion-script', get_stylesheet_directory_uri() . '/widgets/apic-accordion/assets/widget.js', [ 'jquery' ], '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'hello_elementor_child_enqueue_scripts', 20 );
