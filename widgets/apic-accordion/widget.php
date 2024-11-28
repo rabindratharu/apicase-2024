@@ -137,12 +137,12 @@ class Apic_Accordion_Widget extends Widget_Base {
 		$repeater->add_control(
 			'tab_icon',
 			[
-				'label' => esc_html__( 'Icon', 'elementor' ),
-				'type' => Controls_Manager::ICONS,
-				'separator' => 'before',
+				'label' 		=> esc_html__( 'Title Icon', 'elementor' ),
+				'type' 			=> Controls_Manager::ICONS,
+				'separator' 	=> 'before',
 				'fa4compatibility' => 'icon',
-				'skin' => 'inline',
-				'label_block' => false,
+				'skin' 			=> 'inline',
+				'label_block' 	=> false,
 			]
 		);
 
@@ -188,17 +188,6 @@ class Apic_Accordion_Widget extends Widget_Base {
 			]
 		);
 
-		if ( Plugin::$instance->widgets_manager->get_widget_types( 'nested-accordion' ) ) {
-			$this->add_deprecation_message(
-				'3.15.0',
-				esc_html__(
-					'You are currently editing an Accordion Widget in its old version. Any new Accordion widget dragged into the canvas will be the new Accordion widget, with the improved Nested capabilities.',
-					'elementor'
-				),
-				'nested-accordion'
-			);
-		}
-
 		$this->add_control(
 			'tabs',
 			[
@@ -220,60 +209,18 @@ class Apic_Accordion_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'selected_icon',
+			'button_icon',
 			[
-				'label' => esc_html__( 'Icon', 'elementor' ),
-				'type' => Controls_Manager::ICONS,
-				'separator' => 'before',
+				'label' 		=> esc_html__( 'Button Icon', 'elementor' ),
+				'type' 			=> Controls_Manager::ICONS,
+				'separator' 	=> 'before',
 				'fa4compatibility' => 'icon',
-				'default' => [
-					'value' => 'fas fa-plus',
-					'library' => 'fa-solid',
+				'default' 		=> [
+					'value' 	=> 'fas fa-arrow-right',
+					'library' 	=> 'fa-solid',
 				],
-				'recommended' => [
-					'fa-solid' => [
-						'chevron-down',
-						'angle-down',
-						'angle-double-down',
-						'caret-down',
-						'caret-square-down',
-					],
-					'fa-regular' => [
-						'caret-square-down',
-					],
-				],
-				'skin' => 'inline',
-				'label_block' => false,
-			]
-		);
-
-		$this->add_control(
-			'selected_active_icon',
-			[
-				'label' => esc_html__( 'Active Icon', 'elementor' ),
-				'type' => Controls_Manager::ICONS,
-				'fa4compatibility' => 'icon_active',
-				'default' => [
-					'value' => 'fas fa-minus',
-					'library' => 'fa-solid',
-				],
-				'recommended' => [
-					'fa-solid' => [
-						'chevron-up',
-						'angle-up',
-						'angle-double-up',
-						'caret-up',
-						'caret-square-up',
-					],
-					'fa-regular' => [
-						'caret-square-up',
-					],
-				],
-				'skin' => 'inline',
-				'label_block' => false,
-				'condition' => [
-					'selected_icon[value]!' => '',
-				],
+				'skin' 			=> 'inline',
+				'label_block' 	=> false,
 			]
 		);
 
@@ -295,16 +242,7 @@ class Apic_Accordion_Widget extends Widget_Base {
 				'separator' => 'before',
 			]
 		);
-
-		$this->add_control(
-			'faq_schema',
-			[
-				'label' => esc_html__( 'FAQ Schema', 'elementor' ),
-				'type' => Controls_Manager::SWITCHER,
-				'separator' => 'before',
-			]
-		);
-
+		
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -599,25 +537,8 @@ class Apic_Accordion_Widget extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings = $this->get_settings_for_display();
-		$migrated = isset( $settings['__fa4_migrated']['selected_icon'] );
-
-		if ( ! isset( $settings['icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
-			// @todo: remove when deprecated
-			// added as bc in 2.6
-			// add old default
-			$settings['icon'] = 'fa fa-plus';
-			$settings['icon_active'] = 'fa fa-minus';
-			$settings['icon_align'] = $this->get_settings( 'icon_align' );
-		}
-
-		$is_new = empty( $settings['icon'] ) && Icons_Manager::is_migration_allowed();
-		$has_icon = ( ! $is_new || ! empty( $settings['selected_icon']['value'] ) );
-		$id_int = substr( $this->get_id_int(), 0, 3 );
-
-		// echo '<pre>';
-		// print_r($settings['tabs']);
-		// echo '</pre>';
+		$settings 	= $this->get_settings_for_display();
+		$id_int 	= substr( $this->get_id_int(), 0, 3 );
 		?>
 <div class="apic-elmentor-accordion apicbase-image-accordion-wrap">
 
@@ -683,7 +604,11 @@ class Apic_Accordion_Widget extends Widget_Base {
 
                     <?php if ( $item['button_text'] !== '' ) : ?>
                     <a class="apic-elmentor-accordion-button"
-                        <?php $this->print_render_attribute_string( 'button_link_' . $item['_id'] ); ?>><?php echo esc_html( $item['button_text'] ); ?></a>
+                        <?php $this->print_render_attribute_string( 'button_link_' . $item['_id'] ); ?>><?php echo esc_html( $item['button_text'] ); ?>
+                        <?php if ( Icons_Manager::is_migration_allowed() && ! empty( $settings['button_icon']['value'] )) : ?>
+                        <?php Icons_Manager::render_icon( $settings['button_icon'] ); ?>
+                        <?php endif; ?>
+                    </a>
                     <?php endif; ?>
                 </div>
                 <?php if ( ! empty( $item['thumbnail'] ) ) : ?>
