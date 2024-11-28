@@ -9,30 +9,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Attach click event to each heading
       links.forEach((link) => {
-        link.addEventListener("click", (e) => this.toggleDropdown(e, link));
+        link.addEventListener("click", (e) => this.toggleDropdown(link));
       });
     }
 
-    toggleDropdown(event, link) {
+    toggleDropdown(link) {
       // Find the next sibling (the submenu)
-      const nextElement = link.nextElementSibling;
+      const submenu = link.nextElementSibling;
 
-      if (nextElement) {
+      if (submenu) {
         // Toggle the visibility of the submenu
-        nextElement.style.display =
-          nextElement.style.display === "block" ? "none" : "block";
-      }
+        submenu.style.display =
+          submenu.style.display === "block" ? "none" : "block";
 
-      // Toggle the 'accordion-open' class on the parent element
-      link.parentElement.classList.toggle("accordion-open");
+        // Toggle the 'elementor-active' class on the parent element
+        link.parentElement.classList.toggle("elementor-active");
+      }
 
       // If not multiple, close other accordions
       if (!this.multiple) {
-        const allSubmenus = this.el.querySelectorAll(".accordion-submenu");
-        allSubmenus.forEach((submenu) => {
-          if (submenu !== nextElement) {
-            submenu.style.display = "none";
-            submenu.parentElement.classList.remove("accordion-open");
+        const allItems = this.el.querySelectorAll(".apicbase-image-heading");
+
+        allItems.forEach((item) => {
+          const itemSubmenu = item.nextElementSibling;
+
+          if (item !== link && itemSubmenu) {
+            itemSubmenu.style.display = "none";
+            item.parentElement.classList.remove("elementor-active");
           }
         });
       }

@@ -1,31 +1,47 @@
+/* Accordion Submenu */
 .accordion-submenu {
   padding: 0;
   display: none;
 }
-.accordion-open .accordion-submenu {
+
+.elementor-active .accordion-submenu {
   display: block;
 }
+
+/* Accordion List Items */
 .apicbase-image-accordion li {
   list-style: none;
   border-bottom: 1px solid #cfcfcf;
-  padding-bottom: 35px;
-  padding-top: 35px;
+  padding: 35px 0; /* Combined padding-top and padding-bottom */
   width: 47%;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
+
 .apicbase-image-accordion li:last-child {
   border-bottom: none;
 }
+
+/* Accordion Heading */
 .apicbase-image-heading {
   display: flex;
   align-items: center;
   gap: 17px;
+  margin: 0;
 }
-.accordion-open .heading-icon svg path {
+
+/* Active Accordion Icon */
+.elementor-active .apic-elmentor-accordion-icon svg path {
   fill: #fcd500;
 }
+
+/* Content Wrapper */
+.apicbase-content-wrap {
+  padding-bottom: 15px;
+}
+
+/* Image Wrapper */
 .apicbase-image-wrap {
   width: 45%;
   position: absolute;
@@ -35,9 +51,14 @@
   padding-left: 5%;
   text-align: right;
 }
-.apicbase-content-wrap a {
+
+/* Accordion Button */
+.apic-elmentor-accordion-button {
   text-decoration: none;
   color: #000;
   border-bottom: 1px solid #fcd500;
   padding-bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }

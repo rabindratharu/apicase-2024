@@ -269,8 +269,6 @@ class Apic_Accordion_Widget extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .apic-elmentor-accordion-item' => 'border-width: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .apic-elmentor-accordion-item .elementor-tab-content' => 'border-width: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .apic-elmentor-accordion-item .elementor-tab-title.elementor-active' => 'border-width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -282,8 +280,6 @@ class Apic_Accordion_Widget extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .apic-elmentor-accordion-item' => 'border-color: {{VALUE}};',
-					'{{WRAPPER}} .apic-elmentor-accordion-item .elementor-tab-content' => 'border-top-color: {{VALUE}};',
-					'{{WRAPPER}} .apic-elmentor-accordion-item .elementor-tab-title.elementor-active' => 'border-bottom-color: {{VALUE}};',
 				],
 			]
 		);
@@ -299,42 +295,15 @@ class Apic_Accordion_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'title_background',
-			[
-				'label' => esc_html__( 'Background', 'elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .elementor-tab-title' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
 			'title_color',
 			[
 				'label' => esc_html__( 'Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .apic-elmentor-accordion-icon, {{WRAPPER}} .apic-elmentor-accordion-title' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .apic-elmentor-accordion-icon svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .apic-elmentor-accordion-title' => 'color: {{VALUE}};',
 				],
 				'global' => [
 					'default' => Global_Colors::COLOR_PRIMARY,
-				],
-			]
-		);
-
-		$this->add_control(
-			'tab_active_color',
-			[
-				'label' => esc_html__( 'Active Color', 'elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .elementor-active .apic-elmentor-accordion-icon, {{WRAPPER}} .elementor-active .apic-elmentor-accordion-title' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .elementor-active .apic-elmentor-accordion-icon svg' => 'fill: {{VALUE}};',
-				],
-				'global' => [
-					'default' => Global_Colors::COLOR_ACCENT,
 				],
 			]
 		);
@@ -350,22 +319,6 @@ class Apic_Accordion_Widget extends Widget_Base {
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Text_Stroke::get_type(),
-			[
-				'name' => 'text_stroke',
-				'selector' => '{{WRAPPER}} .apic-elmentor-accordion-title',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Text_Shadow::get_type(),
-			[
-				'name' => 'title_shadow',
-				'selector' => '{{WRAPPER}} .apic-elmentor-accordion-title',
-			]
-		);
-
 		$this->add_responsive_control(
 			'title_padding',
 			[
@@ -373,7 +326,7 @@ class Apic_Accordion_Widget extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-tab-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .apic-elmentor-accordion-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -383,31 +336,8 @@ class Apic_Accordion_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_toggle_style_icon',
 			[
-				'label' => esc_html__( 'Icon', 'elementor' ),
+				'label' => esc_html__( 'Title Icon', 'elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'selected_icon[value]!' => '',
-				],
-			]
-		);
-
-		$this->add_control(
-			'icon_align',
-			[
-				'label' => esc_html__( 'Alignment', 'elementor' ),
-				'type' => Controls_Manager::CHOOSE,
-				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Start', 'elementor' ),
-						'icon' => 'eicon-h-align-left',
-					],
-					'right' => [
-						'title' => esc_html__( 'End', 'elementor' ),
-						'icon' => 'eicon-h-align-right',
-					],
-				],
-				'default' => is_rtl() ? 'right' : 'left',
-				'toggle' => false,
 			]
 		);
 
@@ -417,8 +347,8 @@ class Apic_Accordion_Widget extends Widget_Base {
 				'label' => esc_html__( 'Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .elementor-tab-title .apic-elmentor-accordion-icon i:before' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .elementor-tab-title .apic-elmentor-accordion-icon svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .apic-elmentor-accordion-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .apic-elmentor-accordion-icon svg' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -429,8 +359,8 @@ class Apic_Accordion_Widget extends Widget_Base {
 				'label' => esc_html__( 'Active Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .elementor-tab-title.elementor-active .apic-elmentor-accordion-icon i:before' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .elementor-tab-title.elementor-active .apic-elmentor-accordion-icon svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .apic-elmentor-accordion-item.elementor-active .apic-elmentor-accordion-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .apic-elmentor-accordion-item.elementor-active .apic-elmentor-accordion-icon svg' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -453,8 +383,7 @@ class Apic_Accordion_Widget extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .apic-elmentor-accordion-icon.apic-elmentor-accordion-icon-left' => 'margin-right: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .apic-elmentor-accordion-icon.apic-elmentor-accordion-icon-right' => 'margin-left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .apic-elmentor-accordion-item .elementor-tab-title' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -470,23 +399,12 @@ class Apic_Accordion_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
-			'content_background_color',
-			[
-				'label' => esc_html__( 'Background', 'elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .elementor-tab-content' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_control(
 			'content_color',
 			[
 				'label' => esc_html__( 'Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .elementor-tab-content' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .elementor-tab-content .apicbase-content-wrap' => 'color: {{VALUE}};',
 				],
 				'global' => [
 					'default' => Global_Colors::COLOR_TEXT,
@@ -498,18 +416,10 @@ class Apic_Accordion_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'content_typography',
-				'selector' => '{{WRAPPER}} .elementor-tab-content',
+				'selector' => '{{WRAPPER}} .elementor-tab-content .apicbase-content-wrap:not({{WRAPPER}} .elementor-tab-content .apicbase-content-wrap .apic-elmentor-accordion-button)',
 				'global' => [
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
 				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Text_Shadow::get_type(),
-			[
-				'name' => 'content_shadow',
-				'selector' => '{{WRAPPER}} .elementor-tab-content',
 			]
 		);
 
@@ -520,7 +430,76 @@ class Apic_Accordion_Widget extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-tab-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .elementor-tab-content .apicbase-content-wrap:not({{WRAPPER}} .elementor-tab-content .apicbase-content-wrap .apic-elmentor-accordion-button)' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_toggle_style_button',
+			[
+				'label' => esc_html__( 'Button', 'elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'button_color',
+			[
+				'label' => esc_html__( 'Color', 'elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .elementor-tab-content .apic-elmentor-accordion-button' => 'color: {{VALUE}};',
+				],
+				'global' => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
+			]
+		);
+		$this->add_responsive_control(
+			'button_icon_space',
+			[
+				'label' => esc_html__( 'Spacing', 'elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'max' => 100,
+					],
+					'em' => [
+						'max' => 1,
+					],
+					'rem' => [
+						'max' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .elementor-tab-content .apic-elmentor-accordion-button' => 'gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'button_typography',
+				'selector' => '{{WRAPPER}} .elementor-tab-content .apic-elmentor-accordion-button',
+				'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'buttton_padding',
+			[
+				'label' => esc_html__( 'Padding', 'elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
+				'selectors' => [
+					'{{WRAPPER}} .elementor-tab-content .apic-elmentor-accordion-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -586,11 +565,11 @@ class Apic_Accordion_Widget extends Widget_Base {
 				}
 
 				?>
-        <li class="apic-elmentor-accordion-item<?php echo esc_attr( ($index === 0) ? ' accordion-open' : '' );?>">
+        <li class="apic-elmentor-accordion-item<?php echo esc_attr( ($index === 0) ? ' elementor-active' : '' );?>">
             <<?php Utils::print_validated_html_tag( $settings['title_html_tag'] ); ?>
                 <?php $this->print_render_attribute_string( $tab_title_setting_key ); ?>>
                 <?php if ( Icons_Manager::is_migration_allowed() && ! empty( $item['tab_icon']['value'] )) : ?>
-                <span class="heading-icon">
+                <span class="apic-elmentor-accordion-icon">
                     <?php Icons_Manager::render_icon( $item['tab_icon'] ); ?>
                 </span>
                 <?php endif; ?>
@@ -601,7 +580,6 @@ class Apic_Accordion_Widget extends Widget_Base {
             <ul <?php $this->print_render_attribute_string( $tab_content_setting_key ); ?>>
                 <div class="apicbase-content-wrap">
                     <?php $this->print_text_editor( $item['tab_content'] );?>
-
                     <?php if ( $item['button_text'] !== '' ) : ?>
                     <a class="apic-elmentor-accordion-button"
                         <?php $this->print_render_attribute_string( 'button_link_' . $item['_id'] ); ?>><?php echo esc_html( $item['button_text'] ); ?>
