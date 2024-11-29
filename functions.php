@@ -39,6 +39,7 @@ function register_new_widgets( $widgets_manager ) {
   require_once( get_stylesheet_directory() . '/widgets/apic-typing/widget.php' );
   require_once( get_stylesheet_directory() . '/widgets/apic-scroll/widget.php' );
   require_once( get_stylesheet_directory() . '/widgets/apic-accordion/widget.php' );
+  require_once( get_stylesheet_directory() . '/widgets/apic-slider/widget.php' );
 
 }
 add_action( 'elementor/widgets/register', 'register_new_widgets' );
@@ -46,6 +47,14 @@ add_action( 'elementor/widgets/register', 'register_new_widgets' );
 
 // Enqueue styles and scripts only when editing in Elementor
 function hello_elementor_child_enqueue_scripts() {
+
+  wp_register_script( 
+		'swiper', 
+		'https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js', 
+		array(), 
+		'8.3.1', 
+		true 
+	);
     // Scripts and styles for editor
     wp_enqueue_style( 'apic-animation-style', get_stylesheet_directory_uri() . '/widgets/apic-animation/assets/widget.css', [], '1.0.0' );
     wp_enqueue_script( 'apic-animation-script', get_stylesheet_directory_uri() . '/widgets/apic-animation/assets/widget.js', [ 'jquery' ], '1.0.0', true );
@@ -64,5 +73,12 @@ function hello_elementor_child_enqueue_scripts() {
 
     wp_enqueue_style( 'apic-accordion-style', get_stylesheet_directory_uri() . '/widgets/apic-accordion/assets/widget.css', [], '1.0.0' );
     wp_enqueue_script( 'apic-accordion-script', get_stylesheet_directory_uri() . '/widgets/apic-accordion/assets/widget.js', [ 'jquery' ], '1.0.0', true );
+
+
+     wp_enqueue_style('apic-swiper', get_stylesheet_directory_uri() . '/widgets/apic-slider/assets/swiper-bundle.min.css');
+    wp_enqueue_script('apic-swiper', get_stylesheet_directory_uri() . '/widgets/apic-slider/assets/swiper-bundle.min.js', array('jquery'), null, true);
+
+    wp_enqueue_style( 'apic-slider-style', get_stylesheet_directory_uri() . '/widgets/apic-slider/assets/widget.css', ['apic-swiper'], '1.0.0' );
+    wp_enqueue_script( 'apic-slider-script', get_stylesheet_directory_uri() . '/widgets/apic-slider/assets/widget.js', [ 'apic-swiper' ], '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'hello_elementor_child_enqueue_scripts', 20 );

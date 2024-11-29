@@ -1,0 +1,65 @@
+.apicbase-tab-slider-item {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding: 0 80px;
+}
+.swiper-slide-apicbase-tab-content-wrap {
+  width: 40%;
+}
+.swiper-slide-apicbase-tab-main-img {
+  width: 60%;
+}
+.swiper-slide-apicbase-tab-main-img img {
+  max-width: 100%;
+}
+.apicbase-tab-slider .swiper-button-next,
+.apicbase-tab-slider .swiper-button-prev {
+  height: 40px;
+  width: 40px;
+  border: 3px solid #ffd200;
+  border-radius: 50px;
+}
+.apicbase-tab-slider .swiper-button-next::after,
+.apicbase-tab-slider .swiper-button-prev::after {
+  color: #ffd200;
+  font-size: 22px;
+}
+.apicbase-tab-btn {
+  text-decoration: none;
+  background: #ffd200;
+  padding: 10px 15px;
+  display: inline-block;
+  color: #1f1f1f;
+  border-radius: 4px;
+}
+.apicbase-tab-slider {
+  margin-bottom: 50px;
+}
+.apicbase-tab-slider,
+.apicbase-tab-slider-thumbnail {
+  overflow: hidden;
+}
+.apicbase-tab-slider-thumbnail .swiper-slide {
+  text-align: center;
+}
+/* .apicbase-tab-slider-thumbnail{
+  padding: 0 60px;
+}  */
+.apicbase-tab-slider-thumbnail-content {
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.swiper-slide-thumb-active .apicbase-tab-slider-thumbnail-content,
+.apicbase-tab-slider-thumbnail-content:hover {
+  background: #fffcf0;
+  opacity: 1;
+}
+.apicbase-thumbnail-img svg path {
+  fill: #000;
+}
+.swiper-slide-thumb-active .apicbase-thumbnail-img svg path {
+  fill: #ffd200;
+}
