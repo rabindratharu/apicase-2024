@@ -2,13 +2,13 @@
   display: flex;
   align-items: center;
   gap: 50px;
-  padding: 0 80px;
+  padding: 0 87px;
 }
 .swiper-slide-apicbase-tab-content-wrap {
-  width: 40%;
+  width: 30%;
 }
 .swiper-slide-apicbase-tab-main-img {
-  width: 60%;
+  width: 70%;
 }
 .swiper-slide-apicbase-tab-main-img img {
   max-width: 100%;
@@ -19,6 +19,7 @@
   width: 40px;
   border: 3px solid #ffd200;
   border-radius: 50px;
+  top: 30%;
 }
 .apicbase-tab-slider .swiper-button-next::after,
 .apicbase-tab-slider .swiper-button-prev::after {
@@ -28,13 +29,16 @@
 .apicbase-tab-btn {
   text-decoration: none;
   background: #ffd200;
-  padding: 10px 15px;
+  padding: 13px 26px;
   display: inline-block;
   color: #1f1f1f;
   border-radius: 4px;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 500;
 }
 .apicbase-tab-slider {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 .apicbase-tab-slider,
 .apicbase-tab-slider-thumbnail {
@@ -47,10 +51,21 @@
   padding: 0 60px;
 }  */
 .apicbase-tab-slider-thumbnail-content {
-  padding: 15px;
+  padding: 21px 15px;
   border-radius: 12px;
   cursor: pointer;
-  opacity: 0.5;
+  opacity: 0.2;
+}
+.apicbase-tab-slider-thumbnail-content .elementor-slide-title {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #1F1F1F;
+  line-height: 28px;
+}
+.apicbase-tab-slider-thumbnail-content p {
+	font-size: 16px;
+	line-height: 24px;
+	color: #1F1F1F;
 }
 .swiper-slide-thumb-active .apicbase-tab-slider-thumbnail-content,
 .apicbase-tab-slider-thumbnail-content:hover {
@@ -62,4 +77,33 @@
 }
 .swiper-slide-thumb-active .apicbase-thumbnail-img svg path {
   fill: #ffd200;
+}
+.apicbase-tab-slider-thumbnail {
+  padding: 0 87px;
+}
+.apicbase-slider-module {
+  text-align: center;
+}
+.swiper-slide-apicbase-tab-content-wrap p {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1F1F1F;
+  line-height: 28px;
+  display: block;
+}
+.apicbase-slider-module {
+  color: #7C7A79;
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 5px;
+}
+.apicbase-tab-slider-thumbnail-content .apicbase-thumbnail-img {
+  height: 43px;
+  display: block;
+}
+.apicbase-tab-slider-thumbnail-content .apicbase-thumbnail-img svg {
+  vertical-align: middle;
+  transform: translateY(-50%);
+  top: 50%;
+  position: relative;
 }

@@ -13,7 +13,7 @@
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
         centeredSlides: false,
-        spaceBetween: 15,
+        spaceBetween: 40,
       }
     );
     var slider = new Swiper(
