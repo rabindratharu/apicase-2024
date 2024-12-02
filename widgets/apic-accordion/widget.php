@@ -16,93 +16,23 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
  *
  * @since 1.0.0
  */
-class Apic_Accordion_Widget extends Widget_Base {
+class Apic_Accordion_Widget extends \Elementor\Widget_Base {
 
-	/**
-	 * Get widget name.
-	 *
-	 * Retrieve accordion widget name.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return string Widget name.
-	 */
-	public function get_name() {
-		return 'apic_accordion';
-	}
+    public function get_name() {
+        return 'apic_accordion';
+    }
 
-	/**
-	 * Get widget title.
-	 *
-	 * Retrieve accordion widget title.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return string Widget title.
-	 */
-	public function get_title() {
-		return esc_html__( 'APIC Accordion', 'elementor' );
-	}
+    public function get_title() {
+        return __( 'APIC Accordion', 'hello-elementor' );
+    }
 
-	/**
-	 * Get widget icon.
-	 *
-	 * Retrieve accordion widget icon.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return string Widget icon.
-	 */
-	public function get_icon() {
-		return 'eicon-accordion';
-	}
+    public function get_icon() {
+        return 'eicon-elementor-circle';
+    }
 
-	/**
-	 * Get widget keywords.
-	 *
-	 * Retrieve the list of keywords the widget belongs to.
-	 *
-	 * @since 2.1.0
-	 * @access public
-	 *
-	 * @return array Widget keywords.
-	 */
-	public function get_keywords() {
-		return [ 'accordion', 'tabs', 'toggle' ];
-	}
-
-	protected function is_dynamic_content(): bool {
-		return false;
-	}
-
-	/**
-	 * Get style dependencies.
-	 *
-	 * Retrieve the list of style dependencies the widget requires.
-	 *
-	 * @since 3.24.0
-	 * @access public
-	 *
-	 * @return array Widget style dependencies.
-	 */
-	public function get_style_depends(): array {
-		return [ 'widget-accordion' ];
-	}
-
-	/**
-	 * Hide widget from panel.
-	 *
-	 * Hide the toggle widget from the panel if nested-accordion experiment is active.
-	 *
-	 * @since 3.15.0
-	 * @return bool
-	 */
-	public function show_in_panel(): bool {
-		return ! Plugin::$instance->experiments->is_feature_active( 'nested-elements', true );
-	}
+    public function get_categories() {
+        return [ 'basic' ];
+    }
 
 	/**
 	 * Register accordion widget controls.
@@ -602,6 +532,7 @@ class Apic_Accordion_Widget extends Widget_Base {
 </div>
 <?php
 	}
+
 }
 
 // Register Widget

@@ -46,33 +46,13 @@ class Apic_Slider_Widget extends Widget_Base {
 		return esc_html__( 'APIC Slider', 'elementor' );
 	}
 
-	/**
-	 * Get widget icon.
-	 *
-	 * Retrieve slider widget icon.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return string Widget icon.
-	 */
 	public function get_icon() {
-		return 'eicon-slider';
-	}
+        return 'eicon-elementor-circle';
+    }
 
-	/**
-	 * Get widget keywords.
-	 *
-	 * Retrieve the list of keywords the widget belongs to.
-	 *
-	 * @since 2.1.0
-	 * @access public
-	 *
-	 * @return array Widget keywords.
-	 */
-	public function get_keywords() {
-		return [ 'slider', 'carasoul' ];
-	}
+    public function get_categories() {
+        return [ 'basic' ];
+    }
 
 	/**
 	 * Register accordion widget controls.

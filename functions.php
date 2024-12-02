@@ -48,13 +48,6 @@ add_action( 'elementor/widgets/register', 'register_new_widgets' );
 // Enqueue styles and scripts only when editing in Elementor
 function hello_elementor_child_enqueue_scripts() {
 
-  wp_register_script( 
-		'swiper', 
-		'https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js', 
-		array(), 
-		'8.3.1', 
-		true 
-	);
     // Scripts and styles for editor
     wp_enqueue_style( 'apic-animation-style', get_stylesheet_directory_uri() . '/widgets/apic-animation/assets/widget.css', [], '1.0.0' );
     wp_enqueue_script( 'apic-animation-script', get_stylesheet_directory_uri() . '/widgets/apic-animation/assets/widget.js', [ 'jquery' ], '1.0.0', true );
